@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Our Cause - Donation Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #268fda 0%, #2782d1 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.95;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e9;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            background: #e8f5e9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .amount-btn {
+            padding: 15px 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: #fafafa;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .amount-btn:hover,
+        .amount-btn:focus {
+            border-color: #4caf50;
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .amount-btn input[type="radio"] {
+            display: none;
+        }
+
+        .amount-btn:has(input:checked) {
+            border-color: #316fcd;
+            background: #316fcd;
+            color: white;
+        }
+
+        .custom-amount {
+            position: relative;
+        }
+
+        .custom-amount-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .custom-amount-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 15px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .custom-amount input {
+            width: 100%;
+            padding: 12px 15px 12px 35px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .custom-amount input:focus {
+            outline: none;
+            border-color: #316fcd;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 6px;
+        }
+
+        .form-group label .required {
+            color: #e53935;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+            background: #fff;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #316fcd;
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .qr-section {
+            background: #f8fdf8;
+            border: 2px dashed #c8e6c9;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .qr-section img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .upi-id {
+            background: #e8f5e9;
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #316fcd;
+            margin-bottom: 15px;
+        }
+
+        .qr-instructions {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .file-upload {
+            position: relative;
+        }
+
+        .file-upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px;
+            border: 2px dashed #d0d0d0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #fafafa;
+        }
+
+        .file-upload-label:hover {
+            border-color: #316fcd;
+            background: #f1f8e9;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .upload-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .upload-hint {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #fff8e1;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ffe082;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            accent-color: #4caf50;
+            cursor: pointer;
+        }
+
+        .checkbox-wrapper label {
+            font-size: 0.95rem;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+            transition: border-color 0.2s ease;
+            font-family: inherit;
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #316fcd;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px 30px;
+            background: linear-gradient(135deg, #316fcd, #268fda);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e0e0e0, transparent);
+            margin: 30px 0;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        .footer-note a {
+            color: #316fcd;
+            text-decoration: none;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 10px; }
+            .header { padding: 30px 20px; }
+            .header h1 { font-size: 1.6rem; }
+            .form-container { padding: 20px; }
+            .amount-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <header class="header">
+            <img
+                src="assets/img/about-block-img.jpg"
+                alt="Foundation Logo"
+                style="position: absolute; top: 10px; left: 10px; width: 70px; height: auto;"
+            >
+            <h1>Support Our Cause</h1>
+            <p>Your donation empowers lives & bridges human needs.<br>
+               50% tax-exempt under Section 80G & 12A.<br>
+               Join us — one story, one heart at a time.</p>
+        </header>
+
+        <a href="index.html" style="display:block; text-align:center; margin:10px auto;">
+            <button type="button" style="padding:8px 18px; border:none; border-radius:8px; background:#316fcd; color:#fff; cursor:pointer; font-size:0.9rem;">Return to Home Page</button>
+        </a>
+
+        <form class="form-container" action="send.php" method="POST" enctype="multipart/form-data">
+
+            <!-- Donation Amount Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">₹</span>
+                    Select Donation Amount
+                </h2>
+                <div class="amount-grid">
+                    <label class="amount-btn">
+                        <input type="radio" name="amount" value="100"> ₹100
+                    </label>
+                    <label class="amount-btn">
+                        <input type="radio" name="amount" value="500"> ₹500
+                    </label>
+                    <label class="amount-btn">
+                        <input type="radio" name="amount" value="1000"> ₹1000
+                    </label>
+                    <label class="amount-btn">
+                        <input type="radio" name="amount" value="5000"> ₹5000
+                    </label>
+                </div>
+                <div class="custom-amount">
+                    <span class="custom-amount-label">Or enter a custom amount:</span>
+                    <div class="custom-amount-wrapper">
+                        <span class="currency-symbol">₹</span>
+                        <input type="number" name="custom_amount" placeholder="Enter amount" min="1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Donor Information -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">👤</span>
+                    Donor Information
+                </h2>
+                <div class="form-group">
+                    <label for="fullname">Full Name <span class="required">*</span></label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- UPI QR Code -->
+            <div class="section">
+    <h2 class="section-title">
+        <span class="section-icon">📱</span>
+        Make Payment via UPI
+    </h2>
+    <div style="background: #f8fdf8; border: 2px dashed #c8e6c9; border-radius: 12px; padding: 25px; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+        <img src="assets/img/scanner.png" alt="Scan & Pay - Cosmo People Foundation" style="width: 200px; height: 200px; object-fit: contain; border-radius: 10px;">
+        <div style="background: #e8f5e9; padding: 10px 20px; border-radius: 8px; font-family: 'Courier New', monospace; font-weight: 600; color: #316fcd;">cosmopeople@upi</div>
+        <p style="font-size: 0.9rem; color: #666; text-align: center;">Scan this QR code using any UPI app and complete your payment</p>
+    </div>
+</div>
+
+            <div class="divider"></div>
+
+            <!-- Payment Details -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">📋</span>
+                    Payment Details
+                </h2>
+                <div class="form-group">
+                    <label for="utr">UTR / Transaction ID <span class="required">*</span></label>
+                    <input type="text" id="utr" name="utr" placeholder="Enter your UTR or Transaction ID" required>
+                </div>
+                <div class="form-group">
+                    <label for="payment_date">Date of Payment <span class="required">*</span></label>
+                    <input type="date" id="payment_date" name="payment_date" required>
+                </div>
+                <div class="form-group">
+                    <label>Payment Screenshot (Optional)</label>
+                    <div class="file-upload">
+                        <label class="file-upload-label">
+                            <span class="upload-icon">📤</span>
+                            <span class="upload-text">Click to upload screenshot</span>
+                            <span class="upload-hint">PNG, JPG up to 5MB</span>
+                            <input type="file" name="screenshot" accept="image/*">
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Confirmation -->
+            <div class="section">
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="confirm" name="confirm" required>
+                    <label for="confirm">
+                        I confirm that I have completed the payment and the details provided above are accurate.
+                    </label>
+                </div>
+            </div>
+
+            <!-- Feedback -->
+            <div class="section">
+                <h2 class="section-title">
+                    <span class="section-icon">💬</span>
+                    Your Message / Feedback
+                </h2>
+                <div class="form-group">
+                    <label for="message">Share your thoughts (optional)</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Write your message, blessings, or feedback..."></textarea>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="submit-btn">
+                Submit Donation Details
+            </button>
+
+            <p class="footer-note">
+                Thank you for your generosity! You will receive a confirmation email once your donation is verified.
+            </p>
+
+        </form>
+    </div>
+</body>
+</html>
